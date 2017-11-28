@@ -1,4 +1,5 @@
 require 'httparty'
+require 'json'
 
 class Kele
   include HTTParty
@@ -11,5 +12,10 @@ class Kele
     raise "Invalid Login Credentials" if @auth_token.nil?
 
     puts @auth_token
+  end
+
+  def get_me
+    response = self.class.get(url, headers: { "authorization" => @auth_token })
+    JSON.parse(response.body)
   end
 end
