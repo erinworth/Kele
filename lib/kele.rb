@@ -15,7 +15,7 @@ class Kele
   end
 
   def get_me
-    response = self.class.get("/users/me", headers: { "authorization": @auth_token })
+    response = self.class.get("/users/me", headers: { "authorization" => @auth_token })
     JSON.parse(response.body)
   end
 
@@ -23,4 +23,10 @@ class Kele
     response = self.class.get("/mentors/#{mentor_id}/student_availability", headers: { "authorization" => @auth_token })
     JSON.parse(response.body).to_a
   end
+
+  def get_roadmap(roadmap_id)
+    response = self.class.get("/roadmaps/#{roadmap_id}", headers: { "authorization" => @auth_token })
+    JSON.parse(response.body)
+  end
+
 end
