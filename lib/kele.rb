@@ -25,5 +25,14 @@ class Kele
     response = self.class.get("/mentors/#{mentor_id}/student_availability", headers: { "authorization" => @auth_token })
     JSON.parse(response.body).to_a
   end
-  
+
+  def get_messages(page = nil)
+    if page.nil?
+      response = self.class.get('/message_threads', headers: { "authorization" => @auth_token })
+    else
+      response = self.class.get('/message_threads', body: { page: page }, headers: { "authorization" => @auth_token })
+    end
+    JSON.parse(response.body)
+  end
+
 end
